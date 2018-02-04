@@ -2,28 +2,40 @@
 
 using namespace std;
 
-
 class Widget {
 
 public:
 
+	bool tested;
 	int number;
 
-	Widget() {
-		cout << "called default constructor (address is " << this <<")" << endl;
-		number = 1;
+	explicit Widget(bool b=true,int num=-1):tested(b) {
+		if(tested)
+			cout << "called default constructor (address is " << this <<")" << endl;
+		number = num;
 	}
 
-	Widget(const Widget& widget) {
-		cout << "called copy constructor :: ";
-		cout << &widget  << "->" << this << endl;
+	explicit Widget(const Widget& widget, bool b = true) :tested(b) {
+		if (tested) {
+			cout << "called copy constructor :: ";
+			cout << &widget << "->" << this << endl;
+		}
 		number = widget.number;
+	}
+
+	~Widget() {
+		if (tested)
+			cout << "called default destroyer(address : " << this << " , widget number is : " << number << ")\n";
 	}
 
 	void operator=(const Widget& widget) {
-		cout << "called assign operator" << endl;
-		cout << &widget << "->" << this << endl;
+		if (tested) {
+			cout << "called assign operator" << endl;
+			cout << &widget << "->" << this << endl;
+		}
 		number = widget.number;
 	}
 
+	
 };
+
