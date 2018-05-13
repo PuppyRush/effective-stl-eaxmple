@@ -6,7 +6,6 @@
 using namespace std;
 
 
-
 class Widget {
 
 public:
@@ -14,7 +13,7 @@ public:
 	static bool tested;
 	int number;
 
-	explicit Widget(bool b=true,int num=-1) {
+	Widget(int num=-1) {
 		if(tested)
 			cout << "called default constructor (address is " << this <<")" << endl;
 		number = num;
@@ -33,7 +32,8 @@ public:
 			cout << "called default destroyer(address : " << this << " , widget number is : " << number << ")\n";
 	}
 
-	void operator=(const Widget& widget) {
+	void operator=(const Widget& widget)
+	{
 		if (tested) {
 			cout << "called assign operator" << endl;
 			cout << &widget << "->" << this << endl;
@@ -41,6 +41,25 @@ public:
 		number = widget.number;
 	}
 
+	bool operator==(const Widget& widget) const
+	{
+		if (tested)
+			cout << "called assign operator==" << endl;
+
+		if (number == widget.number)
+			return true;
+		else
+			return false;
+	}
+
+	int operator<(const Widget& widget) const
+	{
+		if (tested)
+			cout << "called assign operator<" << endl;
+		return number < widget.number;
+	}
+
+
 	
 };
-
+//bool Widget::tested = true;
