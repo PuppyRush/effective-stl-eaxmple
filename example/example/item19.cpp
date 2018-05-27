@@ -1,11 +1,10 @@
-#include <set>
-#include <map>
-#include <iostream>
-#include "widget.h"
+#pragma once
+#include "includeIndicator.hpp"
+
 using namespace std;
 
-bool Widget::tested = true;
-int main() {
+void item19() 
+{
 	
 	const auto comp = [](const Widget& lhs, const Widget& rhs)->bool
 	{
@@ -26,4 +25,6 @@ int main() {
 
 	multiset<int> mu;
 	mu.insert(3);
+
+	WidgetEx ww;
 }

@@ -6,18 +6,22 @@
 using namespace std;
 
 
-typedef struct ELASPED_TIME {
+typedef struct ELASPED_TIME 
+{
 private:
-	clock_t begin, end;
+	clock_t m_start, m_end;
+
 public:
 
-	void BEGIN() {
-		begin = clock();        // 시간설정
+	void begin() 
+	{
+		m_start = clock();        // 시간설정
 	}
 
-	void END(const string msg="소요시간") {
+	void end(const string msg="소요시간") 
+	{
 
-		end = clock();          // 시간설정
-		cout << msg.c_str() <<  " : " << ((end - begin) / CLOCKS_PER_SEC) << "ms" << endl;
+		m_end = clock();          // 시간설정
+		cout << msg.c_str() <<  " : " << ((m_end - m_start) / CLOCKS_PER_SEC) << "ms" << endl;
 	}
 };

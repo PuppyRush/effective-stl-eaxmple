@@ -10,16 +10,18 @@ class Widget {
 
 public:
 
-	static bool tested;
+	bool tested;
 	int number;
 
-	Widget(int num=-1) {
+	Widget(int num=0, const bool b=true)
+		:tested(b), number(num)
+	{
 		if(tested)
 			cout << "called default constructor (address is " << this <<")" << endl;
-		number = num;
 	}
 
-	explicit Widget(const Widget& widget, bool b = true) {
+	Widget(const Widget& widget)
+	{
 		if (tested) {
 			cout << "called copy constructor :: ";
 			cout << &widget << "->" << this << endl;
@@ -27,18 +29,49 @@ public:
 		number = widget.number;
 	}
 
-	~Widget() {
+	void setTest(const bool b)
+	{
+		tested = b;
+	}
+
+	explicit Widget(const Widget &&widget, bool b = true)
+	{
+		if(tested)
+		{
+			cout << "called copy constructor :: ";
+			cout << &widget << "->" << this << endl;
+		}
+		number = widget.number;
+	}
+
+	~Widget() 
+	{
 		if (tested)
 			cout << "called default destroyer(address : " << this << " , widget number is : " << number << ")\n";
 	}
 
-	void operator=(const Widget& widget)
+	Widget& operator=(const Widget &widget)
 	{
-		if (tested) {
+		if (tested) 
+		{
 			cout << "called assign operator" << endl;
 			cout << &widget << "->" << this << endl;
 		}
+
 		number = widget.number;
+		return *this;
+	}
+
+	Widget& operator=(Widget &&widget)
+	{
+		if(tested)
+		{
+			cout << "called assign operator" << endl;
+			cout << &widget << "->" << this << endl;
+		}
+
+		number = widget.number;
+		return *this;
 	}
 
 	bool operator==(const Widget& widget) const
@@ -62,4 +95,13 @@ public:
 
 	
 };
-//bool Widget::tested = true;
+
+class WidgetEx : public Widget
+{
+public:
+	WidgetEx(const Widget &w = Widget())
+		:Widget(w.number, w.tested)
+	{
+
+	}
+};
