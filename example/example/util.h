@@ -8,7 +8,7 @@
 using namespace std;
 
 
-typedef struct ELASPED_TIME 
+class ELASPED_TIME 
 {
 private:
 	clock_t m_start, m_end;
@@ -29,7 +29,7 @@ public:
 };
 
 
-typedef struct printer
+class printer
 {
 public:
 
